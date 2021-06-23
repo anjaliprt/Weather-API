@@ -1,5 +1,6 @@
 package com.app.WeatherAPI.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -9,6 +10,9 @@ import com.app.WeatherAPI.config.Configuration;
 
 @RestController
 public class WeatherController {
+	
+	
+	
 
     @RequestMapping(method = RequestMethod.GET, value = "/byCity/{country}/{city}")
     public @ResponseBody Object getWeatherByCity(@PathVariable String city, @PathVariable String country) {
@@ -18,7 +22,7 @@ public class WeatherController {
 
         ResponseEntity<Object> response = restTemplate.
                 getForEntity("https://api.openweathermap.org/data/2.5/weather?q=" + city + "," + country +
-                        "&APPID=c3636a4bf66b92c86a9d711a9ef24732",
+                        "&appid="+ Configuration.API_KEY,
                 Object.class);
 
         return response;
